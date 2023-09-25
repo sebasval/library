@@ -1,0 +1,156 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 21 min SDK version: x86_64",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 2056620819
+  },
+  {
+    "level_": 0,
+    "message_": "rebuilding JSON /Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/x86_64/android_gradle_build.json due to:",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -477880867
+  },
+  {
+    "level_": 0,
+    "message_": "- no fingerprint file, will remove stale configuration folder",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1341191149
+  },
+  {
+    "level_": 0,
+    "message_": "removing stale contents from \u0027/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/x86_64\u0027",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1555289516
+  },
+  {
+    "level_": 0,
+    "message_": "created folder \u0027/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/x86_64\u0027",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1644451128
+  },
+  {
+    "level_": 0,
+    "message_": "executing cmake /Users/sebastiandavidvalentierraherrera/Library/Android/sdk/cmake/3.22.1/bin/cmake \\\n  -H/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d21 \\\n  -DANDROID_PLATFORM\u003dandroid-21 \\\n  -DANDROID_ABI\u003dx86_64 \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003dx86_64 \\\n  -DANDROID_NDK\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/cmake/3.22.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/build/intermediates/cxx/Debug/2r496n67/obj/x86_64 \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/build/intermediates/cxx/Debug/2r496n67/obj/x86_64 \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/x86_64 \\\n  -GNinja \\\n  -DANDROID_STL\u003dc++_shared\n",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 1918267132
+  },
+  {
+    "level_": 0,
+    "message_": "/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/cmake/3.22.1/bin/cmake \\\n  -H/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper \\\n  -DCMAKE_SYSTEM_NAME\u003dAndroid \\\n  -DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON \\\n  -DCMAKE_SYSTEM_VERSION\u003d21 \\\n  -DANDROID_PLATFORM\u003dandroid-21 \\\n  -DANDROID_ABI\u003dx86_64 \\\n  -DCMAKE_ANDROID_ARCH_ABI\u003dx86_64 \\\n  -DANDROID_NDK\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_ANDROID_NDK\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620 \\\n  -DCMAKE_TOOLCHAIN_FILE\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \\\n  -DCMAKE_MAKE_PROGRAM\u003d/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/cmake/3.22.1/bin/ninja \\\n  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/build/intermediates/cxx/Debug/2r496n67/obj/x86_64 \\\n  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003d/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/build/intermediates/cxx/Debug/2r496n67/obj/x86_64 \\\n  -DCMAKE_BUILD_TYPE\u003dDebug \\\n  -B/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/x86_64 \\\n  -GNinja \\\n  -DANDROID_STL\u003dc++_shared\n",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 849902971
+  },
+  {
+    "level_": 0,
+    "message_": "Exiting generation of /Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/x86_64/compile_commands.json.bin normally",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -957894163
+  },
+  {
+    "level_": 0,
+    "message_": "done executing cmake",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 543764627
+  },
+  {
+    "level_": 0,
+    "message_": "hard linked /Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/x86_64/compile_commands.json to /Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/tools/debug/x86_64/compile_commands.json",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 417265710
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/libcxx_helper/CMakeLists.txt",
+    "tag_": "debug|x86_64",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1813129585
+  }
+]

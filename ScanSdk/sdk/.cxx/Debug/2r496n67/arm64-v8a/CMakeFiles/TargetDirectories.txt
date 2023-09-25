@@ -1,0 +1,3 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/arm64-v8a/CMakeFiles/opencv_jni_shared.dir
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/android/sdk/.cxx/Debug/2r496n67/arm64-v8a/CMakeFiles/rebuild_cache.dir
