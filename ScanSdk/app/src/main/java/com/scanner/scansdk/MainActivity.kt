@@ -30,6 +30,7 @@ import androidx.camera.video.Quality
 import androidx.camera.video.QualitySelector
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.content.PermissionChecker
+import org.opencv.android.OpenCVLoader
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -50,6 +51,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        if (OpenCVLoader.initDebug()){
+            Toast.makeText(applicationContext,"InitOpenCv",Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(applicationContext,"InitOpenCv",Toast.LENGTH_SHORT).show()
+        }
 
         // Request camera permissions
         if (allPermissionsGranted()) {
