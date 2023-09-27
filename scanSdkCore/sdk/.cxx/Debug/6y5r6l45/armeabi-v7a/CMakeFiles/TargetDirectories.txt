@@ -1,0 +1,3 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/.cxx/Debug/6y5r6l45/armeabi-v7a/CMakeFiles/opencv_jni_shared.dir
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/.cxx/Debug/6y5r6l45/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/.cxx/Debug/6y5r6l45/armeabi-v7a/CMakeFiles/rebuild_cache.dir

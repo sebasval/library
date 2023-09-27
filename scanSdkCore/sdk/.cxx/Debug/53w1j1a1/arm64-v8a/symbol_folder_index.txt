@@ -1,0 +1,1 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/sdk/build/intermediates/cxx/Debug/53w1j1a1/obj/arm64-v8a

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/.cxx/Debug/3271184s/armeabi-v7a",
+  "command": "/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --sysroot=/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Ddocument_detector_EXPORTS -isystem /Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/include -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -g  -fno-limit-debug-info -fPIC -o CMakeFiles/document_detector.dir/src/main/cpp/document_detector.cpp.o -c /Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/src/main/cpp/document_detector.cpp",
+  "file": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/src/main/cpp/document_detector.cpp"
+}
+]

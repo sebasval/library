@@ -1,0 +1,3 @@
+# ninja log v5
+0	13	1695776164743810222	CMakeFiles/document_detector.dir/src/main/cpp/document_detector.cpp.o	53e23b67e73b81bd
+14	67	1695776164796005801	../../../../build/intermediates/cxx/Debug/3271184s/obj/x86_64/libdocument_detector.so	485ecdfff6dd84ec

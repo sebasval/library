@@ -1,0 +1,43 @@
+{
+  "buildFiles": [
+    "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/CMakeLists.txt",
+    "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/OpenCVConfig-version.cmake",
+    "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/OpenCVConfig.cmake",
+    "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/abi-x86_64/OpenCVConfig.cmake",
+    "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/abi-x86_64/OpenCVModules-release.cmake",
+    "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/abi-x86_64/OpenCVModules.cmake"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/.cxx/Debug/3271184s/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/.cxx/Debug/3271184s/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "document_detector::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "document_detector",
+      "output": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/build/intermediates/cxx/Debug/3271184s/obj/x86_64/libdocument_detector.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

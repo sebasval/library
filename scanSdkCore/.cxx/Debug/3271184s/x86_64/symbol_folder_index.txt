@@ -1,0 +1,1 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/build/intermediates/cxx/Debug/3271184s/obj/x86_64

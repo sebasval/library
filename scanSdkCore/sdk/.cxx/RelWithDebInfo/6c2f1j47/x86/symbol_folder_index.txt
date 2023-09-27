@@ -1,0 +1,1 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/sdk/build/intermediates/cxx/RelWithDebInfo/6c2f1j47/obj/x86

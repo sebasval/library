@@ -1,0 +1,6 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/CMakeLists.txt
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/OpenCVConfig-version.cmake
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/OpenCVConfig.cmake
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/abi-x86/OpenCVConfig.cmake
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/abi-x86/OpenCVModules-release.cmake
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/native/jni/abi-x86/OpenCVModules.cmake

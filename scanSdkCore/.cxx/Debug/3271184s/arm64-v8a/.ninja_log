@@ -1,0 +1,5 @@
+# ninja log v5
+0	19	1695776163750407246	CMakeFiles/document_detector.dir/src/main/cpp/document_detector.cpp.o	5480db6fbce028e2
+20	85	1695776163815514802	../../../../build/intermediates/cxx/Debug/3271184s/obj/arm64-v8a/libdocument_detector.so	ed5b3ad938b0a041
+0	433	1695776294915812311	CMakeFiles/document_detector.dir/src/main/cpp/document_detector.cpp.o	5480db6fbce028e2
+434	555	1695776295038894409	../../../../build/intermediates/cxx/Debug/3271184s/obj/arm64-v8a/libdocument_detector.so	ed5b3ad938b0a041

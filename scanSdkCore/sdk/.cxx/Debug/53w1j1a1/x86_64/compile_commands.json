@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/sdk/.cxx/Debug/53w1j1a1/x86_64",
+  "command": "/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --sysroot=/Users/sebastiandavidvalentierraherrera/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -g  -fno-limit-debug-info -fPIC -o CMakeFiles/opencv_jni_shared.dir/dummy.cpp.o -c /Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/sdk/libcxx_helper/dummy.cpp",
+  "file": "/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/sdk/libcxx_helper/dummy.cpp"
+}
+]

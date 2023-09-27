@@ -1,3 +1,4 @@
 .ninja_deps
 .ninja_log
-scanSdkCore/sdk/build
+sdk/build
+additional_project_files.txt

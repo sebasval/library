@@ -1,0 +1,3 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/.cxx/Debug/3271184s/x86_64/CMakeFiles/document_detector.dir
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/.cxx/Debug/3271184s/x86_64/CMakeFiles/edit_cache.dir
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/.cxx/Debug/3271184s/x86_64/CMakeFiles/rebuild_cache.dir

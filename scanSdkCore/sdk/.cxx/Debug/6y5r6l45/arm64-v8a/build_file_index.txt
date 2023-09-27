@@ -1,0 +1,1 @@
+/Users/sebastiandavidvalentierraherrera/AndroidStudioProjects/library/scanSdkCore/sdk/libcxx_helper/CMakeLists.txt
