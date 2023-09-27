@@ -7,4 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 interface ScanSdkPublicInterface {
     fun launchCamera(activity: AppCompatActivity)
     fun setImageCapturedCallback(callback: (Bitmap) -> Unit)
+
+    fun onImageCaptured(bitmap: Bitmap)
 }

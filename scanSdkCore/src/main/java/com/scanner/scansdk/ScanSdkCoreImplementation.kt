@@ -18,7 +18,7 @@ class ScanSdkCoreImplementation(private val context: Context) : ScanSdkPublicInt
         imageCapturedCallback = callback
     }
 
-    internal fun onImageCaptured(bitmap: Bitmap) {
+    override fun onImageCaptured(bitmap: Bitmap) {
         imageCapturedCallback?.invoke(bitmap)
     }
 }

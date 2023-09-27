@@ -54,6 +54,8 @@ class CameraActivity : AppCompatActivity() {
 
     private external fun findDocumentCorners(inputMatAddr: Long): FloatArray?
 
+    private val scanSdk: ScanSdkPublicInterface by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityCameraBinding.inflate(layoutInflater)
@@ -121,9 +123,10 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val msg = "Photo capture succeeded: ${output.savedUri}"
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, msg)
+                    val savedUri = output.savedUri ?: return
+                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, savedUri)
+                    val croppedBitmap = cropBitmap(bitmap, rect)
+                    scanSdk.onImageCaptured(croppedBitmap)
                 }
             }
         )
@@ -262,6 +265,15 @@ class CameraActivity : AppCompatActivity() {
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
     }
 
+    private fun cropBitmap(bitmap: Bitmap, rect: Rect): Bitmap {
+        return Bitmap.createBitmap(
+            bitmap,
+            rect.left,
+            rect.top,
+            rect.width(),
+            rect.height()
+        )
+    }
 
     companion object {
         private const val TAG = "CameraXApp"
