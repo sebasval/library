@@ -7,6 +7,8 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <jni.h>
+
 inline double angle(const cv::Point& pt1, const cv::Point& pt2, const cv::Point& pt0) {
     double dx1 = pt1.x - pt0.x;
     double dy1 = pt1.y - pt0.y;
@@ -56,4 +58,28 @@ inline void findDocumentCorners(const cv::Mat& image, std::vector<cv::Point>& co
             }
         }
     }
+}
+
+extern "C" JNIEXPORT jfloatArray JNICALL
+Java_com_scanner_scansdk_CameraActivity_findDocumentCorners(JNIEnv *env, jobject /* this */, jlong inputMatAddr) {
+    cv::Mat &inputMat = *(cv::Mat *) inputMatAddr;
+    std::vector<cv::Point> corners;
+
+    findDocumentCorners(inputMat, corners);
+
+    if (corners.size() != 4) {
+        return nullptr;
+    }
+
+    jfloatArray result = env->NewFloatArray(8);  // 8 porque tenemos 4 puntos (x, y) * 4 = 8
+    jfloat buf[8];
+
+    for (int i = 0; i < 4; ++i) {
+        buf[2 * i] = (jfloat) corners[i].x;
+        buf[2 * i + 1] = (jfloat) corners[i].y;
+    }
+
+    env->SetFloatArrayRegion(result, 0, 8, buf);
+
+    return result;
 }

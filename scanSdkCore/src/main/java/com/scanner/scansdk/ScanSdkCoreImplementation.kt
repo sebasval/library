@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 
-// ScanSdkCoreImplementation.kt
 class ScanSdkCoreImplementation(private val context: Context) : ScanSdkPublicInterface {
     override fun launchCamera(activity: AppCompatActivity) {
         val intent = Intent(context, CameraActivity::class.java)

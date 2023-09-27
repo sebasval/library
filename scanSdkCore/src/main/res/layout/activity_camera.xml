@@ -32,4 +32,11 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".50" />
 
+
+    <com.scanner.scansdk.rectangle.RectangleOverlay
+        android:id="@+id/rectangleOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
