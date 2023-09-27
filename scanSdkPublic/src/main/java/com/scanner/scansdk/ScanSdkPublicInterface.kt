@@ -1,9 +1,10 @@
 package com.scanner.scansdk
 
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 
 interface ScanSdkPublicInterface {
     fun launchCamera(activity: AppCompatActivity)
-    fun captureDocument(callback: (Uri?) -> Unit)
+    fun setImageCapturedCallback(callback: (Bitmap) -> Unit)
 }

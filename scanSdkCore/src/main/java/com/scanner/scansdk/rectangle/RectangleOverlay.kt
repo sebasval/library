@@ -5,9 +5,7 @@ import android.util.AttributeSet
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Rect
 import android.view.View
-import org.opencv.core.Mat
 
 class RectangleOverlay : View {
     constructor(context: Context) : super(context) {
@@ -34,10 +32,10 @@ class RectangleOverlay : View {
         paint.strokeWidth = 4f
     }
 
-    var corners: FloatArray? = null  // Cambiado de Mat a FloatArray
+    var corners: FloatArray? = null
 
-    private var imageWidth: Int = 0
-    private var imageHeight: Int = 0
+    var imageWidth: Int = 0
+    var imageHeight: Int = 0
 
     fun setImageDimensions(width: Int, height: Int) {
         this.imageWidth = width

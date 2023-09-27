@@ -1,6 +1,7 @@
 package com.scanner.scansdk
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.scanner.scansdk.databinding.ActivityMainBinding
 import org.koin.android.ext.android.inject
@@ -14,5 +15,8 @@ class MainActivity : AppCompatActivity() {
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         scanSdk.launchCamera(this)
+        scanSdk.setImageCapturedCallback {
+            Log.d("mi cliente","llego el bitmap: $it")
+        }
     }
 }

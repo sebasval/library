@@ -30,6 +30,7 @@ import androidx.core.content.ContextCompat
 import com.scanner.scansdk.rectangle.RectangleOverlay
 import com.scanner.scansdkcore.R
 import com.scanner.scansdkcore.databinding.ActivityCameraBinding
+import org.koin.android.ext.android.inject
 import org.opencv.android.OpenCVLoader
 import org.opencv.android.Utils
 import org.opencv.core.CvType
@@ -40,6 +41,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 @ExperimentalGetImage
 class CameraActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityCameraBinding
@@ -65,7 +67,7 @@ class CameraActivity : AppCompatActivity() {
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        // Request camera permissions
+
         if (allPermissionsGranted()) {
             startCamera()
         } else {
@@ -74,16 +76,24 @@ class CameraActivity : AppCompatActivity() {
             )
         }
 
-        // Set up the listeners for take photo and video capture buttons
+
         viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
     }
 
     private fun takePhoto() {
-        Toast.makeText(applicationContext, "Hola", Toast.LENGTH_SHORT).show()
-        // Get a stable reference of the modifiable image capture use case
+        val corners = rectangleOverlay.corners ?: return
+        val scaleFactorX = rectangleOverlay.width.toFloat() / rectangleOverlay.imageWidth
+        val scaleFactorY = rectangleOverlay.height.toFloat() / rectangleOverlay.imageHeight
+
+        val x1 = (corners[0] * scaleFactorX).toInt()
+        val y1 = (corners[1] * scaleFactorY).toInt()
+        val x2 = (corners[2] * scaleFactorX).toInt()
+        val y2 = (corners[3] * scaleFactorY).toInt()
+
+        val rect = Rect(x1, y1, x2, y2)
+
         val imageCapture = imageCapture ?: return
 
-        // Create time stamped name and MediaStore entry.
         val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
             .format(System.currentTimeMillis())
         val contentValues = ContentValues().apply {
@@ -94,7 +104,6 @@ class CameraActivity : AppCompatActivity() {
             }
         }
 
-        // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions
             .Builder(
                 contentResolver,
@@ -103,8 +112,6 @@ class CameraActivity : AppCompatActivity() {
             )
             .build()
 
-        // Set up image capture listener, which is triggered after photo has
-        // been taken
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
@@ -113,8 +120,7 @@ class CameraActivity : AppCompatActivity() {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
 
-                override fun
-                        onImageSaved(output: ImageCapture.OutputFileResults) {
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
@@ -122,6 +128,7 @@ class CameraActivity : AppCompatActivity() {
             }
         )
     }
+
     @ExperimentalGetImage
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -136,10 +143,10 @@ class CameraActivity : AppCompatActivity() {
                 val imageHeight = imageProxy.height
                 val bitmap = imageProxyToBitmap(imageProxy)
                 val mat = Mat()
-                Utils.bitmapToMat(bitmap,mat)
+                Utils.bitmapToMat(bitmap, mat)
                 val cornersFound = findDocumentCorners(mat.nativeObjAddr)
 
-                if (cornersFound!=null){
+                if (cornersFound != null) {
                     rectangleOverlay.setImageDimensions(imageWidth, imageHeight)
                     rectangleOverlay.corners = cornersFound
                     rectangleOverlay.invalidate()
@@ -149,28 +156,21 @@ class CameraActivity : AppCompatActivity() {
         }
 
         cameraProviderFuture.addListener({
-            // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
             val preview = Preview.Builder()
                 .build()
                 .also {
                     it.setSurfaceProvider(viewBinding.viewFinder.surfaceProvider)
                 }
 
-            // Initialize ImageCapture
             imageCapture = ImageCapture.Builder()
                 .build()
 
-            // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
-                // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
-
-                // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture, imageAnalysis
                 )
@@ -223,7 +223,6 @@ class CameraActivity : AppCompatActivity() {
 
         val nv21 = ByteArray(ySize + uSize + vSize)
 
-        // U and V are swapped
         yBuffer.get(nv21, 0, ySize)
         vBuffer.get(nv21, ySize, vSize)
         uBuffer.get(nv21, ySize + vSize, uSize)
@@ -250,12 +249,13 @@ class CameraActivity : AppCompatActivity() {
 
         val nv21 = ByteArray(ySize + uSize + vSize)
 
-        // U and V are swapped
+
         yBuffer.get(nv21, 0, ySize)
         vBuffer.get(nv21, ySize, vSize)
         uBuffer.get(nv21, ySize + vSize, uSize)
 
-        val yuvImage = android.graphics.YuvImage(nv21, ImageFormat.NV21, image.width, image.height, null)
+        val yuvImage =
+            android.graphics.YuvImage(nv21, ImageFormat.NV21, image.width, image.height, null)
         val out = ByteArrayOutputStream()
         yuvImage.compressToJpeg(Rect(0, 0, yuvImage.width, yuvImage.height), 100, out)
         val imageBytes = out.toByteArray()
