@@ -132,12 +132,15 @@ class CameraActivity : AppCompatActivity() {
 
         imageAnalysis.setAnalyzer(cameraExecutor) { imageProxy ->
             imageProxy.image?.let {
+                val imageWidth = imageProxy.width
+                val imageHeight = imageProxy.height
                 val bitmap = imageProxyToBitmap(imageProxy)
                 val mat = Mat()
                 Utils.bitmapToMat(bitmap,mat)
                 val cornersFound = findDocumentCorners(mat.nativeObjAddr)
 
                 if (cornersFound!=null){
+                    rectangleOverlay.setImageDimensions(imageWidth, imageHeight)
                     rectangleOverlay.corners = cornersFound
                     rectangleOverlay.invalidate()
                 }
