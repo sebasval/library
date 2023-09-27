@@ -14,8 +14,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "android"
-include ':app', ':sdk', ':scanSdkPublic', ':scanSdkCore', ':scanSdkLibrary'
-project(":sdk").projectDir = file("../sdk")
+include ':app', ':scanSdkPublic', ':scanSdkCore', ':scanSdkCore:sdk', ':scanSdkLibrary'
 project(":scanSdkPublic").projectDir = file("../scanSdkPublic")
 project(":scanSdkCore").projectDir = file("../scanSdkCore")
+project(":scanSdkCore:sdk").projectDir = file("../scanSdkCore/sdk")
 project(":scanSdkLibrary").projectDir = file("../scanSdkLibrary")

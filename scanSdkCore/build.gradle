@@ -12,6 +12,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
     }
 
     buildTypes {
@@ -30,6 +35,13 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    externalNativeBuild{
+        cmake {
+            path "CMakeLists.txt"
+            version "3.22.1"
+        }
     }
 }
 
@@ -60,4 +72,7 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
+    //OpenCv
+    implementation project(':scanSdkCore:sdk')
 }

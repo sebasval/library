@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.scanner.scansdkcore.R
 import com.scanner.scansdkcore.databinding.ActivityCameraBinding
+import org.opencv.android.OpenCVLoader
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
@@ -37,6 +38,10 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        if(OpenCVLoader.initDebug()){
+            Toast.makeText(applicationContext,"SI esta init", Toast.LENGTH_SHORT).show()
+        }
 
         // Request camera permissions
         if (allPermissionsGranted()) {
