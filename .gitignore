@@ -1,2 +1,3 @@
-sdk/.cxx/
 .ninja_deps
+.ninja_log
+scanSdkCore/sdk/build
