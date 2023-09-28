@@ -27,7 +27,7 @@ class CameraHandler(
     private val viewBinding: ActivityCameraBinding,
     private val cameraExecutor: ExecutorService,
     private val findDocumentCorners: (Long) -> FloatArray?,
-    private val rectangleOverlay: RectangleOverlay
+    val rectangleOverlay: RectangleOverlay
 ) {
 
     var imageCapture: ImageCapture? = null

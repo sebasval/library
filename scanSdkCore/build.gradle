@@ -37,10 +37,16 @@ android {
         viewBinding true
     }
 
-    externalNativeBuild{
+    externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
             version "3.22.1"
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
 }
@@ -51,6 +57,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.test:core-ktx:1.5.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -75,4 +82,27 @@ dependencies {
 
     //OpenCv
     implementation project(':scanSdkCore:sdk')
+
+    //test
+    def testRunnerVersion = '1.4.0'
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    def espressoVersion = '3.4.0'
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    def jUnitVersion = '4.13.2'
+    testImplementation "junit:junit:$jUnitVersion"
+    def mockitoCoreVersion = '3.6.0'
+    testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+    def mockitoInlineVersion = '3.6.0'
+    testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
+    def mockitoKotlinVersion = '2.2.0'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    def archCoreTestingVersion = '2.1.0'
+    testImplementation "androidx.arch.core:core-testing:$archCoreTestingVersion"
+    def striktVersion = '0.33.0'
+    testImplementation "io.strikt:strikt-core:$striktVersion"
+    def androidJodaVersion = '2.10.7.2'
+    testImplementation "net.danlew:android.joda:$androidJodaVersion"
+
+    def robolectric = '4.9'
+    testImplementation "org.robolectric:robolectric:$robolectric"
 }

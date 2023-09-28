@@ -12,6 +12,7 @@
     <application>
         <activity
             android:name="com.scanner.scansdk.CameraActivity"
+            android:theme="@style/AppTheme"
             android:exported="false" />
     </application>
 
