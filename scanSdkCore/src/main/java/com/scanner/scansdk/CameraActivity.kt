@@ -44,7 +44,7 @@ class CameraActivity : AppCompatActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
         cameraHandler = CameraHandler(
             this,
-            viewBinding,
+            viewBinding.viewFinder.surfaceProvider,
             cameraExecutor,
             findDocumentCorners = this::findDocumentCorners,
             rectangleOverlay

@@ -12,6 +12,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
+import androidx.camera.core.Preview.SurfaceProvider
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.scanner.scansdk.camera.ImageCaptureManager
@@ -24,7 +25,7 @@ import java.util.concurrent.ExecutorService
 
 class CameraHandler(
     private val activity: AppCompatActivity,
-    private val viewBinding: ActivityCameraBinding,
+    private val surfaceProvider: SurfaceProvider,
     private val cameraExecutor: ExecutorService,
     private val findDocumentCorners: (Long) -> FloatArray?,
     val rectangleOverlay: RectangleOverlay
@@ -62,7 +63,7 @@ class CameraHandler(
             val preview = Preview.Builder()
                 .build()
                 .also {
-                    it.setSurfaceProvider(viewBinding.viewFinder.surfaceProvider)
+                    it.setSurfaceProvider(surfaceProvider)
                 }
 
             imageCapture = ImageCapture.Builder()

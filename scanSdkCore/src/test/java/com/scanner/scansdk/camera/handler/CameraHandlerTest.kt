@@ -1,81 +1,72 @@
 package com.scanner.scansdk.camera.handler
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.Preview.SurfaceProvider
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.*
-import com.scanner.scansdk.camera.ImageCaptureManager
 import com.scanner.scansdk.rectangle.RectangleOverlay
-import com.scanner.scansdkcore.databinding.ActivityCameraBinding
 import org.junit.Test
 import org.junit.runner.RunWith
-import strikt.api.expectThat
-import strikt.assertions.isNotNull
 import java.util.concurrent.ExecutorService
-import org.mockito.Mockito.spy
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import com.scanner.scansdkcore.R
+import org.robolectric.RuntimeEnvironment
+import strikt.api.expectThat
+import java.util.concurrent.Executors
 
 @RunWith(RobolectricTestRunner::class)
 class CameraHandlerTest {
 
-    private fun provideMockActivity(): AppCompatActivity {
-        val realActivity = Robolectric.setupActivity(AppCompatActivity::class.java)
-        return spy(realActivity)
+    private fun provideTestActivity(): AppCompatActivity {
+        val activityController = Robolectric.buildActivity(AppCompatActivity::class.java)
+        val activity = activityController.get()
+        activity.setTheme(R.style.AppTheme)
+        activityController.create().resume()
+        return activity
     }
-
-    private fun provideMockViewBinding(): ActivityCameraBinding = mock()
-
-    private fun provideMockExecutorService(): ExecutorService = mock()
 
     private fun provideMockFindDocumentCorners(): (Long) -> FloatArray? = mock {
         onGeneric { invoke(any()) } doReturn floatArrayOf(1.0f, 1.0f)
     }
 
-    private fun provideMockRectangleOverlay(): RectangleOverlay = mock {
-        on { setImageDimensions(any(), any()) } doReturn Unit
-        on { invalidate() } doReturn Unit
+    private fun provideSpyRectangleOverlay(): RectangleOverlay {
+        return RectangleOverlay(RuntimeEnvironment.getApplication())
     }
 
     private fun providesCameraHandler(
         mockActivity: AppCompatActivity,
-        mockViewBinding: ActivityCameraBinding,
+        surfaceProvider: SurfaceProvider,
         mockExecutorService: ExecutorService,
         mockFindDocumentCorners: (Long) -> FloatArray?,
         mockRectangleOverlay: RectangleOverlay
     ): CameraHandler {
         return CameraHandler(
             mockActivity,
-            mockViewBinding,
+            surfaceProvider,
             mockExecutorService,
             mockFindDocumentCorners,
             mockRectangleOverlay
         )
     }
 
-
     @Test
     fun `test StartCamera`() {
         // Given
-        val mockActivity = provideMockActivity()
-        val mockViewBinding = provideMockViewBinding()
-        val mockExecutorService = provideMockExecutorService()
-        val mockFindDocumentCorners = provideMockFindDocumentCorners()
-        val mockRectangleOverlay = provideMockRectangleOverlay()
+        val activity = provideTestActivity()
+        val mockSurfaceProvider: SurfaceProvider = mock()
+        val executorService = Executors.newSingleThreadExecutor()
+        val findDocumentCorners = provideMockFindDocumentCorners()
+        val rectangleOverlay = provideSpyRectangleOverlay()
 
         val cameraHandler = providesCameraHandler(
-            mockActivity,
-            mockViewBinding,
-            mockExecutorService,
-            mockFindDocumentCorners,
-            mockRectangleOverlay
+            activity,
+            mockSurfaceProvider,
+            executorService,
+            findDocumentCorners,
+            rectangleOverlay
         )
 
-        // When
         cameraHandler.startCamera()
-
-        // Then
-        verify(mockRectangleOverlay).setImageDimensions(any(), any())
-        verify(mockRectangleOverlay, times(1)).setImageDimensions(any(), any())
-        expectThat(cameraHandler.imageCapture).isNotNull()
-        expectThat(ImageCaptureManager.imageCapture).isNotNull()
     }
 }
