@@ -11,6 +11,7 @@ import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.scanner.scansdk.camera.binder.CameraBinder
 import com.scanner.scansdk.camera.handler.CameraHandler
 import com.scanner.scansdk.camera.processor.PhotoProcessor
 import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapper
@@ -32,6 +33,7 @@ class CameraActivity : AppCompatActivity() {
     private val scanSdk: ScanSdkPublicInterface by inject()
     private val imageCapture: ImageCapture by inject()
     private val imageCaptureWrapper: ImageCaptureWrapper by inject()
+    private val cameraBinder: CameraBinder by inject()
 
     private external fun findDocumentCorners(inputMatAddr: Long): FloatArray?
 
@@ -52,7 +54,7 @@ class CameraActivity : AppCompatActivity() {
             cameraExecutor,
             findDocumentCorners = this::findDocumentCorners,
             rectangleOverlay,
-            imageCapture
+            cameraBinder
         )
         photoProcessor = PhotoProcessor(this, scanSdk, imageCaptureWrapper)
 

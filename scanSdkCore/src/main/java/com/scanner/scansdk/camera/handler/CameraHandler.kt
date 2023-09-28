@@ -9,15 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.core.Preview.SurfaceProvider
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.scanner.scansdk.camera.ImageCaptureManager
+import com.scanner.scansdk.camera.binder.CameraBinder
 import com.scanner.scansdk.rectangle.RectangleOverlay
-import com.scanner.scansdkcore.databinding.ActivityCameraBinding
 import org.opencv.android.Utils
 import org.opencv.core.Mat
 import java.io.ByteArrayOutputStream
@@ -29,7 +27,7 @@ class CameraHandler(
     private val cameraExecutor: ExecutorService,
     private val findDocumentCorners: (Long) -> FloatArray?,
     val rectangleOverlay: RectangleOverlay,
-    private val imageCapture: ImageCapture
+    private val cameraBinder: CameraBinder
 ) {
 
     @ExperimentalGetImage
@@ -67,15 +65,7 @@ class CameraHandler(
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    activity, cameraSelector, preview, imageCapture, imageAnalysis
-                )
-
-            } catch (exc: Exception) {
-                Log.e("TAG", "Use case binding failed", exc)
-            }
+            cameraBinder.bindToLifecycle(cameraProvider,activity,cameraSelector,preview,imageAnalysis)
 
         }, ContextCompat.getMainExecutor(activity))
     }
