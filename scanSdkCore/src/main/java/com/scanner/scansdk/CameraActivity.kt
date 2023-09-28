@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.camera.core.ExperimentalGetImage
+import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.scanner.scansdk.camera.handler.CameraHandler
 import com.scanner.scansdk.camera.processor.PhotoProcessor
+import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapper
 import com.scanner.scansdk.rectangle.RectangleOverlay
 import com.scanner.scansdkcore.databinding.ActivityCameraBinding
 import org.koin.android.ext.android.inject
@@ -26,8 +28,10 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var rectangleOverlay: RectangleOverlay
     private lateinit var photoProcessor: PhotoProcessor
-    private val scanSdk: ScanSdkPublicInterface by inject()
     private lateinit var cameraHandler: CameraHandler
+    private val scanSdk: ScanSdkPublicInterface by inject()
+    private val imageCapture: ImageCapture by inject()
+    private val imageCaptureWrapper: ImageCaptureWrapper by inject()
 
     private external fun findDocumentCorners(inputMatAddr: Long): FloatArray?
 
@@ -47,9 +51,10 @@ class CameraActivity : AppCompatActivity() {
             viewBinding.viewFinder.surfaceProvider,
             cameraExecutor,
             findDocumentCorners = this::findDocumentCorners,
-            rectangleOverlay
+            rectangleOverlay,
+            imageCapture
         )
-        photoProcessor = PhotoProcessor(this, scanSdk)
+        photoProcessor = PhotoProcessor(this, scanSdk, imageCaptureWrapper)
 
         if (allPermissionsGranted()) {
             cameraHandler.startCamera()

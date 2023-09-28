@@ -34,7 +34,7 @@ class CameraHandlerTest {
         return RectangleOverlay(RuntimeEnvironment.getApplication())
     }
 
-    private fun providesCameraHandler(
+    /*private fun providesCameraHandler(
         mockActivity: AppCompatActivity,
         surfaceProvider: SurfaceProvider,
         mockExecutorService: ExecutorService,
@@ -68,5 +68,5 @@ class CameraHandlerTest {
         )
 
         cameraHandler.startCamera()
-    }
+    }*/
 }

@@ -28,10 +28,9 @@ class CameraHandler(
     private val surfaceProvider: SurfaceProvider,
     private val cameraExecutor: ExecutorService,
     private val findDocumentCorners: (Long) -> FloatArray?,
-    val rectangleOverlay: RectangleOverlay
+    val rectangleOverlay: RectangleOverlay,
+    private val imageCapture: ImageCapture
 ) {
-
-    var imageCapture: ImageCapture? = null
 
     @ExperimentalGetImage
     fun startCamera() {
@@ -65,10 +64,6 @@ class CameraHandler(
                 .also {
                     it.setSurfaceProvider(surfaceProvider)
                 }
-
-            imageCapture = ImageCapture.Builder()
-                .build()
-            ImageCaptureManager.imageCapture = imageCapture
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 

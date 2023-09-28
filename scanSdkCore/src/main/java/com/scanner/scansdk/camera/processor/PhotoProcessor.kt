@@ -12,13 +12,16 @@ import androidx.camera.core.ImageCaptureException
 import androidx.core.content.ContextCompat
 import com.scanner.scansdk.ScanSdkPublicInterface
 import com.scanner.scansdk.camera.ImageCaptureManager
+import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapper
+import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapperImpl
 import com.scanner.scansdk.rectangle.RectangleOverlay
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class PhotoProcessor(
     private val activity: AppCompatActivity,
-    private val scanSdk: ScanSdkPublicInterface
+    private val scanSdk: ScanSdkPublicInterface,
+    private var imageCaptureWrapper: ImageCaptureWrapper,
 ) {
 
     private val TAG = "PhotoProcessor"
@@ -27,10 +30,8 @@ class PhotoProcessor(
     fun takePhoto(rectangleOverlay: RectangleOverlay) {
         val corners = rectangleOverlay.corners ?: return
         val (left, top, width, height) = getDimensions(corners)
-        val imageCaptureInstance = ImageCaptureManager.imageCapture ?: return
         val outputOptions = createOutputOptions()
-
-        captureImage(imageCaptureInstance, outputOptions, left, top, width, height)
+        captureImage(outputOptions, left, top, width, height)
     }
 
     private fun getDimensions(corners: FloatArray): Dimensions {
@@ -70,11 +71,10 @@ class PhotoProcessor(
     }
 
     private fun captureImage(
-        imageCaptureInstance: ImageCapture,
         outputOptions: ImageCapture.OutputFileOptions,
         left: Int, top: Int, width: Int, height: Int
     ) {
-        imageCaptureInstance.takePicture(
+        imageCaptureWrapper.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(activity),
             object : ImageCapture.OnImageSavedCallback {
@@ -84,7 +84,8 @@ class PhotoProcessor(
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri ?: return
-                    val bitmap = MediaStore.Images.Media.getBitmap(activity.contentResolver, savedUri)
+                    val bitmap =
+                        MediaStore.Images.Media.getBitmap(activity.contentResolver, savedUri)
                     val rotatedBitmap = rotateBitmap(bitmap, 90.0F)
                     val croppedBitmap = cropBitmap(rotatedBitmap, left, top, width, height)
                     processCapturedImage(croppedBitmap)
