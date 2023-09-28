@@ -49,7 +49,7 @@ class CameraActivity : AppCompatActivity() {
             findDocumentCorners = this::findDocumentCorners,
             rectangleOverlay
         )
-        photoProcessor = PhotoProcessor(this, viewBinding, scanSdk)
+        photoProcessor = PhotoProcessor(this, scanSdk)
 
         if (allPermissionsGranted()) {
             cameraHandler.startCamera()
