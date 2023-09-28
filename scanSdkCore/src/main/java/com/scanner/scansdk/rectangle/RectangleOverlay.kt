@@ -34,6 +34,15 @@ class RectangleOverlay : View {
 
     var corners: FloatArray? = null
 
+    var x1:Float? = null
+    var y1:Float? = null
+    var x2:Float? = null
+    var y2:Float? = null
+    var x3:Float? = null
+    var y3:Float? = null
+    var x4:Float? = null
+    var y4:Float? = null
+
     var imageWidth: Int = 0
     var imageHeight: Int = 0
 
@@ -41,7 +50,6 @@ class RectangleOverlay : View {
         this.imageWidth = width
         this.imageHeight = height
     }
-
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -53,19 +61,19 @@ class RectangleOverlay : View {
         val scaleFactorY = canvasHeight.toFloat() / imageHeight
 
         corners?.let {
-            val x1 = it[0] * scaleFactorX
-            val y1 = it[1] * scaleFactorY
-            val x2 = it[2] * scaleFactorX
-            val y2 = it[3] * scaleFactorY
-            val x3 = it[4] * scaleFactorX
-            val y3 = it[5] * scaleFactorY
-            val x4 = it[6] * scaleFactorX
-            val y4 = it[7] * scaleFactorY
+             x1 = it[0] * scaleFactorX
+             y1 = it[1] * scaleFactorY
+             x2 = it[2] * scaleFactorX
+             y2 = it[3] * scaleFactorY
+             x3 = it[4] * scaleFactorX
+             y3 = it[5] * scaleFactorY
+             x4 = it[6] * scaleFactorX
+             y4 = it[7] * scaleFactorY
 
-            canvas.drawLine(x1, y1, x2, y2, paint)
-            canvas.drawLine(x2, y2, x3, y3, paint)
-            canvas.drawLine(x3, y3, x4, y4, paint)
-            canvas.drawLine(x4, y4, x1, y1, paint)
+            canvas.drawLine(x1!!, y1!!, x2!!, y2!!, paint)
+            canvas.drawLine(x2!!, y2!!, x3!!, y3!!, paint)
+            canvas.drawLine(x3!!, y3!!, x4!!, y4!!, paint)
+            canvas.drawLine(x4!!, y4!!, x1!!, y1!!, paint)
         }
     }
 }

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageFormat
+import android.graphics.Matrix
 import android.graphics.Rect
 import android.media.Image
 import android.os.Build
@@ -41,6 +42,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.math.max
+import kotlin.math.min
 
 @ExperimentalGetImage
 class CameraActivity : AppCompatActivity() {
@@ -61,10 +64,6 @@ class CameraActivity : AppCompatActivity() {
         viewBinding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        if (OpenCVLoader.initDebug()) {
-            Toast.makeText(applicationContext, "SI esta init", Toast.LENGTH_SHORT).show()
-        }
-
         rectangleOverlay = viewBinding.rectangleOverlay
 
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -83,16 +82,25 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
+
         val corners = rectangleOverlay.corners ?: return
-        val scaleFactorX = rectangleOverlay.width.toFloat() / rectangleOverlay.imageWidth
-        val scaleFactorY = rectangleOverlay.height.toFloat() / rectangleOverlay.imageHeight
+        val x1 = (corners[0]).toInt()
+        val y1 = (corners[1]).toInt()
+        val x2 = (corners[2]).toInt()
+        val y2 = (corners[3]).toInt()
+        val x3 = (corners[4]).toInt()
+        val y3 = (corners[5]).toInt()
+        val x4 = (corners[6]).toInt()
+        val y4 = (corners[7]).toInt()
 
-        val x1 = (corners[0] * scaleFactorX).toInt()
-        val y1 = (corners[1] * scaleFactorY).toInt()
-        val x2 = (corners[2] * scaleFactorX).toInt()
-        val y2 = (corners[3] * scaleFactorY).toInt()
 
-        val rect = Rect(x1, y1, x2, y2)
+        val left = min(min(x1, x2), min(x3, x4))
+        val top = min(min(y1, y2), min(y3, y4))
+        val right = max(max(x1, x2), max(x3, x4))
+        val width = right - left
+        val bottom = max(max(y1, y2), max(y3, y4))
+        val height = bottom - top
+
 
         val imageCapture = imageCapture ?: return
 
@@ -125,12 +133,26 @@ class CameraActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri ?: return
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, savedUri)
-                    val croppedBitmap = cropBitmap(bitmap, rect)
-                    scanSdk.onImageCaptured(croppedBitmap)
+                    val rotateBitmap = rotateBitmap(bitmap,90.0F)
+                    val croppedBitmap = cropBitmap(rotateBitmap, left, top, width, height)
+                    croppedBitmap?.let {
+                        scanSdk.onImageCaptured(croppedBitmap)
+                    } ?: Toast.makeText(
+                        applicationContext,
+                        "Toma la foto de nuevo, imagen no reconocida",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         )
     }
+
+    fun rotateBitmap(bitmap: Bitmap, degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+
 
     @ExperimentalGetImage
     private fun startCamera() {
@@ -265,13 +287,13 @@ class CameraActivity : AppCompatActivity() {
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
     }
 
-    private fun cropBitmap(bitmap: Bitmap, rect: Rect): Bitmap {
+    private fun cropBitmap(bitmap: Bitmap, left: Int, top: Int, width: Int, height: Int): Bitmap? {
         return Bitmap.createBitmap(
             bitmap,
-            rect.left,
-            rect.top,
-            rect.width(),
-            rect.height()
+            left,
+            top,
+            width,
+            height
         )
     }
 
