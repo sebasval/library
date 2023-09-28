@@ -64,6 +64,10 @@ class CameraActivity : AppCompatActivity() {
         viewBinding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        if (OpenCVLoader.initDebug()) {
+            Log.d("OpenCvTag","init correctamente")
+        }
+
         rectangleOverlay = viewBinding.rectangleOverlay
 
         cameraExecutor = Executors.newSingleThreadExecutor()
