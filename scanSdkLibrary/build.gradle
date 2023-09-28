@@ -38,7 +38,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     //ScanSdkCore
-    api project(':scanSdkCore')
+    implementation project(':scanSdkCore')
+    //ScanSdkPblic
+    api project(':scanSdkPublic')
 
     //Koin
     def koin_version = "3.2.0-beta-1"
