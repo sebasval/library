@@ -77,6 +77,7 @@ class PhotoProcessor(
                     val croppedBitmap = cropBitmap(rotateBitmap, left, top, width, height)
                     croppedBitmap?.let {
                         scanSdk.onImageCaptured(croppedBitmap)
+                        activity.finish()
                     } ?: Toast.makeText(
                         activity.applicationContext,
                         "Toma la foto de nuevo, imagen no reconocida",

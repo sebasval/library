@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
         scanSdk.launchCamera(this)
         scanSdk.setImageCapturedCallback {
-            Log.d("mi cliente","llego el bitmap: $it")
+            viewBinding.imageViewScanSdk.setImageBitmap(it)
         }
     }
 }
