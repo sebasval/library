@@ -7,8 +7,8 @@ class ImageCaptureWrapperImpl(private val imageCapture: ImageCapture) : ImageCap
     override fun takePicture(
         outputOptions: ImageCapture.OutputFileOptions,
         executor: Executor,
-        callback: ImageCapture.OnImageSavedCallback
+        callback: ImageCapture.OnImageCapturedCallback
     ) {
-        imageCapture.takePicture(outputOptions, executor, callback)
+        imageCapture.takePicture(executor, callback)
     }
 }

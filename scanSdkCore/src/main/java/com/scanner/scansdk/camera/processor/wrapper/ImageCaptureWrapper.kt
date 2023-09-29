@@ -7,6 +7,6 @@ interface ImageCaptureWrapper {
     fun takePicture(
         outputOptions: ImageCapture.OutputFileOptions,
         executor: Executor,
-        callback: ImageCapture.OnImageSavedCallback
+        callback: ImageCapture.OnImageCapturedCallback
     )
 }

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.camera.core.ExperimentalGetImage
-import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.scanner.scansdk.camera.binder.CameraBinder
@@ -31,7 +30,6 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var photoProcessor: PhotoProcessor
     private lateinit var cameraHandler: CameraHandler
     private val scanSdk: ScanSdkPublicInterface by inject()
-    private val imageCapture: ImageCapture by inject()
     private val imageCaptureWrapper: ImageCaptureWrapper by inject()
     private val cameraBinder: CameraBinder by inject()
 
@@ -66,9 +64,7 @@ class CameraActivity : AppCompatActivity() {
             )
         }
         viewBinding.imageCaptureButton.setOnClickListener {
-            photoProcessor.takePhoto(
-                rectangleOverlay
-            )
+            photoProcessor.takePhoto()
         }
     }
 

@@ -56,7 +56,7 @@ class PhotoProcessorTest {
 
 
         // When
-        photoProcessor.takePhoto(mockRectangleOverlay)
+        photoProcessor.takePhoto()
 
         // Then
         verify(imageCaptureWrapper).takePicture(any(), any(), any())

@@ -14,7 +14,6 @@ import com.scanner.scansdk.ScanSdkPublicInterface
 import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapper
 import com.scanner.scansdk.camera.utils.sortCorners
 import com.scanner.scansdk.camera.utils.toBitmap
-import com.scanner.scansdk.rectangle.RectangleOverlay
 import org.opencv.android.Utils
 import org.opencv.core.Mat
 import java.text.SimpleDateFormat
@@ -30,31 +29,10 @@ class PhotoProcessor(
     private val TAG = "PhotoProcessor"
     private val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
 
-    fun takePhoto(rectangleOverlay: RectangleOverlay) {
+    fun takePhoto() {
         val outputOptions = createOutputOptions()
         captureImage(outputOptions)
     }
-
-    private fun getDimensions(corners: FloatArray): Dimensions {
-        val x1 = (corners[0]).toInt()
-        val y1 = (corners[1]).toInt()
-        val x2 = (corners[2]).toInt()
-        val y2 = (corners[3]).toInt()
-        val x3 = (corners[4]).toInt()
-        val y3 = (corners[5]).toInt()
-        val x4 = (corners[6]).toInt()
-        val y4 = (corners[7]).toInt()
-
-        val left = minOf(x1, x2, x3, x4)
-        val top = minOf(y1, y2, y3, y4)
-        val right = maxOf(x1, x2, x3, x4)
-        val width = right - left
-        val bottom = maxOf(y1, y2, y3, y4)
-        val height = bottom - top
-
-        return Dimensions(left, top, width, height)
-    }
-
     private fun createOutputOptions(): ImageCapture.OutputFileOptions {
         val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
         val contentValues = ContentValues()
@@ -99,7 +77,8 @@ class PhotoProcessor(
 
                     bitmap?.let {
                         val croppedBitmap = cropBitmap(it, startX, startY, endX, endY)
-                        processCapturedImage(croppedBitmap)
+                        val bitmapRotated = croppedBitmap?.let { croppedBitmap -> rotateBitmap(croppedBitmap,90F) }
+                        processCapturedImage(bitmapRotated)
                     }
                     image.close()
                 }
