@@ -19,7 +19,7 @@ import org.opencv.core.Mat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PhotoProcessor(
+open class PhotoProcessor(
     private val activity: AppCompatActivity,
     private val scanSdk: ScanSdkPublicInterface,
     private var imageCaptureWrapper: ImageCaptureWrapper,

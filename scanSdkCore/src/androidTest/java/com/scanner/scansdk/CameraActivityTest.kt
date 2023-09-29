@@ -13,6 +13,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.GrantPermissionRule
 import com.scanner.scansdk.camera.binder.CameraBinder
 import com.scanner.scansdk.camera.binder.CameraBinderImpl
+import com.scanner.scansdk.camera.processor.PhotoProcessor
 import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapper
 import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapperImpl
 import com.scanner.scansdkcore.R
@@ -58,6 +59,18 @@ class CameraActivityTest : KoinTest {
     )
 
     @Test
+    fun checkPermissionDeniedBehavior() {
+        activityRule.scenario.onActivity { activity ->
+            activity.onRequestPermissionsResult(
+                CameraActivity.REQUEST_CODE_PERMISSIONS,
+                CameraActivity.REQUIRED_PERMISSIONS,
+                IntArray(CameraActivity.REQUIRED_PERMISSIONS.size) { PackageManager.PERMISSION_DENIED }
+            )
+        }
+    }
+
+
+    @Test
     fun checkStartCamera() {
         activityRule.scenario.onActivity { activity ->
             val cameraHandlerSpy = spy(activity.cameraHandler)
@@ -77,4 +90,18 @@ class CameraActivityTest : KoinTest {
     fun checkCaptureButtonDisplayed() {
         onView(withId(R.id.image_capture_button)).perform(click())
     }
+
+    @Test
+    fun checkPhotoProcessorInvokedOnButton() {
+        lateinit var photoProcessorSpy: PhotoProcessor
+
+        activityRule.scenario.onActivity { activity ->
+            photoProcessorSpy = spy(activity.photoProcessor)
+            activity.photoProcessor = photoProcessorSpy
+        }
+
+        onView(withId(R.id.image_capture_button)).perform(click())
+        verify(photoProcessorSpy, times(1)).takePhoto()
+    }
+
 }

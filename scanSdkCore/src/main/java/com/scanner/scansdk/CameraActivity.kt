@@ -27,7 +27,7 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityCameraBinding
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var rectangleOverlay: RectangleOverlay
-    private lateinit var photoProcessor: PhotoProcessor
+    lateinit var photoProcessor: PhotoProcessor
     lateinit var cameraHandler: CameraHandler
     private val scanSdk: ScanSdkPublicInterface by inject()
     private val imageCaptureWrapper: ImageCaptureWrapper by inject()
