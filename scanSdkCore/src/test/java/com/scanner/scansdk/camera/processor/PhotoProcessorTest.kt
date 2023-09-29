@@ -22,6 +22,10 @@ class PhotoProcessorTest {
         return activity
     }
 
+    private fun provideMockFindDocumentCorners(): (Long) -> FloatArray? = mock {
+        onGeneric { invoke(any()) } doReturn floatArrayOf(1.0f, 1.0f)
+    }
+
 
     private fun provideMockImageCaptureWrapper():ImageCaptureWrapper{
         return mock()
@@ -31,7 +35,7 @@ class PhotoProcessorTest {
         mockScanSdk: ScanSdkPublicInterface,
         imageCaptureWrapper: ImageCaptureWrapper
     ): PhotoProcessor {
-        return PhotoProcessor(mockActivity, mockScanSdk, imageCaptureWrapper)
+        return PhotoProcessor(mockActivity, mockScanSdk, imageCaptureWrapper, provideMockFindDocumentCorners())
     }
 
     private fun provideSpyRectangleOverlay(): RectangleOverlay {

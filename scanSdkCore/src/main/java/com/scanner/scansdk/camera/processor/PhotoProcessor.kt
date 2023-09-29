@@ -4,17 +4,19 @@ import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
 import androidx.core.content.ContextCompat
 import com.scanner.scansdk.ScanSdkPublicInterface
-import com.scanner.scansdk.camera.ImageCaptureManager
 import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapper
-import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapperImpl
+import com.scanner.scansdk.camera.utils.sortCorners
+import com.scanner.scansdk.camera.utils.toBitmap
 import com.scanner.scansdk.rectangle.RectangleOverlay
+import org.opencv.android.Utils
+import org.opencv.core.Mat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -22,16 +24,15 @@ class PhotoProcessor(
     private val activity: AppCompatActivity,
     private val scanSdk: ScanSdkPublicInterface,
     private var imageCaptureWrapper: ImageCaptureWrapper,
+    private val findDocumentCorners: (Long) -> FloatArray?
 ) {
 
     private val TAG = "PhotoProcessor"
     private val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
 
     fun takePhoto(rectangleOverlay: RectangleOverlay) {
-        val corners = rectangleOverlay.corners ?: return
-        val (left, top, width, height) = getDimensions(corners)
         val outputOptions = createOutputOptions()
-        captureImage(outputOptions, left, top, width, height)
+        captureImage(outputOptions)
     }
 
     private fun getDimensions(corners: FloatArray): Dimensions {
@@ -71,24 +72,36 @@ class PhotoProcessor(
     }
 
     private fun captureImage(
-        outputOptions: ImageCapture.OutputFileOptions,
-        left: Int, top: Int, width: Int, height: Int
+        outputOptions: ImageCapture.OutputFileOptions
     ) {
         imageCaptureWrapper.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(activity),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+            object : ImageCapture.OnImageCapturedCallback(){
+                override fun onError(exception: ImageCaptureException) {
+                    super.onError(exception)
                 }
 
-                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = output.savedUri ?: return
-                    val bitmap =
-                        MediaStore.Images.Media.getBitmap(activity.contentResolver, savedUri)
-                    val rotatedBitmap = rotateBitmap(bitmap, 90.0F)
-                    val croppedBitmap = cropBitmap(rotatedBitmap, left, top, width, height)
-                    processCapturedImage(croppedBitmap)
+                override fun onCaptureSuccess(image: ImageProxy) {
+                    super.onCaptureSuccess(image)
+
+                    val bitmap = image.toBitmap()
+                    val mat = Mat()
+                    Utils.bitmapToMat(bitmap, mat)
+                    val corners = findDocumentCorners(mat.nativeObjAddr)
+
+                    val cornersSorted = corners?.sortCorners()
+
+                    val startX = cornersSorted?.first()?.point?.x?.toInt()!!
+                    val startY = cornersSorted.first().point.y.toInt()
+                    val endX = cornersSorted.last().point.x.minus(startX).toInt()
+                    val endY = cornersSorted.last().point.y.minus(startY).toInt()
+
+                    bitmap?.let {
+                        val croppedBitmap = cropBitmap(it, startX, startY, endX, endY)
+                        processCapturedImage(croppedBitmap)
+                    }
+                    image.close()
                 }
             }
         )
