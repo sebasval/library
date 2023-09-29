@@ -7,12 +7,12 @@ import org.koin.core.context.GlobalContext.loadKoinModules
 import org.koin.dsl.module
 
 
-val scanSdkCoreModule = module {
+val scanSdkLibraryModule = module {
     single<ScanSdkPublicInterface> { ScanSdkCoreImplementation(get()) }
 }
 object ScanSdkLibraryInitializer {
     fun initialize() {
-        loadKoinModules(scanSdkCoreModule)
+        loadKoinModules(scanSdkLibraryModule)
         ScanSdkCoreInitializer.initialize()
     }
 }

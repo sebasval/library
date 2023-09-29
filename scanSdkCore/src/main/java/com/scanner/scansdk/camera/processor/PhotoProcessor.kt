@@ -112,6 +112,4 @@ class PhotoProcessor(
         matrix.postRotate(degrees)
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
-
-    private data class Dimensions(val left: Int, val top: Int, val width: Int, val height: Int)
 }

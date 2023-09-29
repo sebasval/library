@@ -8,12 +8,14 @@ import com.scanner.scansdk.camera.processor.wrapper.ImageCaptureWrapperImpl
 import org.koin.dsl.module
 import org.koin.core.context.GlobalContext.loadKoinModules
 
-val module = module {
-    single { ImageCapture.Builder().build() }
-    single<ImageCaptureWrapper> { ImageCaptureWrapperImpl(get()) }
-    single<CameraBinder> { CameraBinderImpl(get()) }
-}
+
 object ScanSdkCoreInitializer {
+    val module = module {
+        single { ImageCapture.Builder().build() }
+        single<ImageCaptureWrapper> { ImageCaptureWrapperImpl(get()) }
+        single<CameraBinder> { CameraBinderImpl(get()) }
+    }
+    
     fun initialize() {
         loadKoinModules(module)
     }
