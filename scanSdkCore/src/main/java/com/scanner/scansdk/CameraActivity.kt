@@ -56,7 +56,7 @@ class CameraActivity : AppCompatActivity() {
             rectangleOverlay,
             cameraBinder
         )
-        photoProcessor = PhotoProcessor(this, scanSdk, imageCaptureWrapper)
+        photoProcessor = PhotoProcessor(this, scanSdk, imageCaptureWrapper, this::findDocumentCorners)
 
         if (allPermissionsGranted()) {
             cameraHandler.startCamera()
