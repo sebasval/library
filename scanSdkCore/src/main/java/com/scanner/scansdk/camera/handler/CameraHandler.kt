@@ -15,7 +15,7 @@ import org.opencv.android.Utils
 import org.opencv.core.Mat
 import java.util.concurrent.ExecutorService
 
-class CameraHandler(
+open class CameraHandler(
     private val activity: AppCompatActivity,
     private val surfaceProvider: SurfaceProvider,
     private val cameraExecutor: ExecutorService,

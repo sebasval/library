@@ -2,6 +2,7 @@ package com.scanner.scansdk
 
 import android.Manifest
 import android.app.Application
+import android.content.pm.PackageManager
 import androidx.camera.core.ImageCapture
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
@@ -22,6 +23,9 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import org.koin.test.KoinTestRule
 import org.koin.test.KoinTest
+import org.mockito.Mockito.spy
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.times
 
 @RunWith(AndroidJUnit4::class)
 class CameraActivityTest : KoinTest {
@@ -52,6 +56,22 @@ class CameraActivityTest : KoinTest {
         Manifest.permission.CAMERA,
         Manifest.permission.RECORD_AUDIO
     )
+
+    @Test
+    fun checkStartCamera() {
+        activityRule.scenario.onActivity { activity ->
+            val cameraHandlerSpy = spy(activity.cameraHandler)
+            activity.cameraHandler = cameraHandlerSpy
+
+            activity.onRequestPermissionsResult(
+                CameraActivity.REQUEST_CODE_PERMISSIONS,
+                CameraActivity.REQUIRED_PERMISSIONS,
+                IntArray(CameraActivity.REQUIRED_PERMISSIONS.size) { PackageManager.PERMISSION_GRANTED }
+            )
+
+            verify(cameraHandlerSpy, times(1)).startCamera()
+        }
+    }
 
     @Test
     fun checkCaptureButtonDisplayed() {

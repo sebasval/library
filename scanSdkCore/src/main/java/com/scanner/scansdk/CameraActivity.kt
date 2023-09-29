@@ -28,7 +28,7 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var rectangleOverlay: RectangleOverlay
     private lateinit var photoProcessor: PhotoProcessor
-    private lateinit var cameraHandler: CameraHandler
+    lateinit var cameraHandler: CameraHandler
     private val scanSdk: ScanSdkPublicInterface by inject()
     private val imageCaptureWrapper: ImageCaptureWrapper by inject()
     private val cameraBinder: CameraBinder by inject()
@@ -99,8 +99,8 @@ class CameraActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS =
+        const val REQUEST_CODE_PERMISSIONS = 10
+        val REQUIRED_PERMISSIONS =
             mutableListOf(
                 Manifest.permission.CAMERA,
                 Manifest.permission.RECORD_AUDIO

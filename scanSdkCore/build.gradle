@@ -94,6 +94,7 @@ dependencies {
     testImplementation "junit:junit:$jUnitVersion"
     def mockitoCoreVersion = '3.6.0'
     testImplementation "org.mockito:mockito-core:$mockitoCoreVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoCoreVersion"
     def mockitoInlineVersion = '3.6.0'
     testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
     def mockitoKotlinVersion = '2.2.0'
